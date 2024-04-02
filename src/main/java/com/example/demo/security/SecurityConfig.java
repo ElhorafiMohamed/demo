@@ -27,7 +27,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+//the filtre of securite spring
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(

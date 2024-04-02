@@ -26,34 +26,38 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
-             @NonNull HttpServletResponse response,
-             @NonNull FilterChain filterChain)
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
 
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request,response);
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
             return;
         }
 
+        //get the token authHeader without a bearer
         String token = authHeader.substring(7);
+        // get the username that was in the token
         String username = jwtService.extractUsername(token);
 
-        if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
+        //check if the user not null and not was authentificate
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            //get the user
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-
-            if(jwtService.isValid(token, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
-
+            //check if the token is to the same username and it is not exp and not logout
+            if (jwtService.isValid(token, userDetails)) {
+                //this is based by spring securite token
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities());
+                //set auth in web (ip,id session )
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
-
+                //set token in the securitycontext
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }

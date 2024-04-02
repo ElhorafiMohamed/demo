@@ -27,24 +27,24 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(User request) {
 
-        // check if user already exist. if exist than authenticate the user
+        // check if user already exist.
         if(repository.findByUsername(request.getUsername()).isPresent()) {
             return new AuthenticationResponse(null, "User already exist");
         }
 
+        //create the user obj
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
-
         user.setRole(request.getRole());
-
         user = repository.save(user);
 
+        //create the token
         String jwt = jwtService.generateToken(user);
 
+        //save user and token
         saveUserToken(jwt, user);
 
         return new AuthenticationResponse(jwt, "User registration was successful");
@@ -60,16 +60,14 @@ public class AuthenticationService {
         );
 
         User user = repository.findByUsername(request.getUsername()).orElseThrow();
-        System.out.println(user);
         String jwt = jwtService.generateToken(user);
-        System.out.println(jwt);
 
         revokeAllTokenByUser(user);
         saveUserToken(jwt, user);
 
         return new AuthenticationResponse(jwt, "User login was successful");
-
     }
+
     private void revokeAllTokenByUser(User user) {
         List<Token> validTokens = tokenRepository.findAllTokensByUser(user.getId());
         if(validTokens.isEmpty()) {
@@ -82,6 +80,7 @@ public class AuthenticationService {
 
         tokenRepository.saveAll(validTokens);
     }
+
     private void saveUserToken(String jwt, User user) {
         Token token = new Token();
         token.setToken(jwt);
