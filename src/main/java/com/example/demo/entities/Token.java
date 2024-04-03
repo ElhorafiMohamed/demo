@@ -4,12 +4,15 @@ package com.example.demo.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.SQLOutput;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
+@ToString
 @Table(name = "token")
 public class Token {
 
@@ -34,7 +37,11 @@ public class Token {
         return loggedOut;
     }
 
-
+//    @Override
+//    public String toString() {
+//        System.out.println(token);
+//        return token;
+//    }
 
 
 }

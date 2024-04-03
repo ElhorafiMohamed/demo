@@ -15,7 +15,6 @@ public class DemoService {
     private final EmailSender emailSender;
     public ResponseEntity<String> infos() throws MessagingException, IOException {
         emailSender.sendSimpleMail();
-
         return ResponseEntity.ok("Hello from user only url");
     }
 

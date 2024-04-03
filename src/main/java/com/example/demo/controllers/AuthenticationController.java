@@ -1,7 +1,8 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.entities.AuthenticationResponse;
+import com.example.demo.dtos.ChangePassDTO;
+import com.example.demo.exceptions.AuthenticationResponse;
 import com.example.demo.entities.User;
 import com.example.demo.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -17,16 +18,27 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody User request
-            ) {
-        return ResponseEntity.ok(authService.register(request));
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody User request) {
+        return authService.register(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(
-            @RequestBody User request
-    ) {
-        return ResponseEntity.ok(authService.authenticate(request));
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody User request) {
+        return authService.authenticate(request);
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<AuthenticationResponse> changePassword(@RequestBody ChangePassDTO request) {
+        return authService.changePassword(request);
+    }
+
+    @PostMapping("/getToken")
+    public ResponseEntity<AuthenticationResponse> getToken(@RequestBody User request) {
+        return authService.getToken(request);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthenticationResponse> refresh(@RequestBody User request) {
+        return authService.authenticate(request);
     }
 }
