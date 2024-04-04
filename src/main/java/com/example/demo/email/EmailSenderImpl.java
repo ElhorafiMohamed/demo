@@ -30,7 +30,7 @@ public class EmailSenderImpl implements EmailSender {
 //        SimpleMailMessage mailMessage = new SimpleMailMessage();
 //
 ////        mailMessage.setFrom(sender);
-//        mailMessage.setTo("elhorafimed@gmail.com");
+//        mailMessage.setTo("EMAIL SENDER");
 //        mailMessage.setSubject("Test Email");
 //        String htmlContent = "<html><body><h1>Hello</h1><p>This is a test email to verify email connectivity.</p></body></html>";
 //        mailMessage.setText(htmlContent);
@@ -42,7 +42,7 @@ public class EmailSenderImpl implements EmailSender {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         //helper.setFrom(sender);
-        helper.setTo("elhorafimed@gmail.com");
+        helper.setTo("EMAIL SENDER");
         helper.setSubject("Test Email");
 
         // Load HTML content from a template file or a string
