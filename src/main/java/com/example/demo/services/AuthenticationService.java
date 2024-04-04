@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 
+import com.example.demo.dao.AuthenticationDao;
 import com.example.demo.dtos.ChangePassDTO;
 import com.example.demo.exceptions.AuthenticationResponse;
 import com.example.demo.entities.Token;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationService {
+public class AuthenticationService implements AuthenticationDao {
 
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
@@ -46,7 +47,7 @@ public class AuthenticationService {
         }
     }
 
-    private User createUserFromRequest(User request) {
+    public User createUserFromRequest(User request) {
         return User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -98,7 +99,7 @@ public class AuthenticationService {
         }
     }
 
-    private void revokeAllTokenByUser(User user) {
+    public void revokeAllTokenByUser(User user) {
         List<Token> validTokens = tokenRepository.findAllTokensByUser(user.getId());
         if (validTokens.isEmpty()) {
             return;
@@ -111,7 +112,7 @@ public class AuthenticationService {
         tokenRepository.saveAll(validTokens);
     }
 
-    private void saveUserToken(String jwt, User user) {
+    public void saveUserToken(String jwt, User user) {
         Token token = new Token();
         token.setToken(jwt);
         token.setLoggedOut(false);

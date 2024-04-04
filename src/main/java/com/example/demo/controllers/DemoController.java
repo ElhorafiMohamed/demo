@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.dao.DemoDao;
 import com.example.demo.services.DemoService;
 import jakarta.mail.MessagingException;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.io.IOException;
 @AllArgsConstructor
 @RestController
 public class DemoController {
-    private final DemoService demoService;
+    private final DemoDao demoService;
 
     private static final Logger logger = LoggerFactory.getLogger(DemoController.class);
 

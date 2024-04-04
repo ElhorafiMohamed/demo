@@ -1,10 +1,10 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.dao.AuthenticationDao;
 import com.example.demo.dtos.ChangePassDTO;
 import com.example.demo.exceptions.AuthenticationResponse;
 import com.example.demo.entities.User;
-import com.example.demo.services.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
-    private final AuthenticationService authService;
+    private final AuthenticationDao authService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody User request) {
