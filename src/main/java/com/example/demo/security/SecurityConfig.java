@@ -43,7 +43,8 @@ public class SecurityConfig {
                                 .permitAll()
                                 .requestMatchers("/admin_only/**").hasAuthority("ADMIN")
                                 .anyRequest()
-                                .authenticated()
+                                //.authenticated()
+                                .permitAll()
                 ).userDetailsService(userDetailsServiceImp)
                 .sessionManagement(session->session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

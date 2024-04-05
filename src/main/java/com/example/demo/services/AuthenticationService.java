@@ -117,6 +117,7 @@ public class AuthenticationService implements AuthenticationDao {
         token.setToken(jwt);
         token.setLoggedOut(false);
         token.setUser(user);
+        System.out.println(jwt);
         tokenRepository.save(token);
     }
 
