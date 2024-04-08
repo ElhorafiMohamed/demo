@@ -2,8 +2,10 @@ package com.example.demo.services;
 
 
 import com.example.demo.dao.FileDao;
+import com.example.demo.entities.AttachmentType;
 import com.example.demo.entities.File;
 import com.example.demo.exceptions.ResponseMessage;
+import com.example.demo.repositories.AttachementTypeRepository;
 import com.example.demo.repositories.FileRepository;
 import com.example.demo.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +30,7 @@ public class FileService implements FileDao {
     private final Path root = Paths.get("upload");
     private final FileUtil fileUtil;
     private final FileRepository fileRepository;
+    private final AttachementTypeRepository attachementTypeRepository;
 
     @Override
     public ResponseEntity<ResponseMessage> save(MultipartFile[] files) {
@@ -47,6 +51,9 @@ public class FileService implements FileDao {
                 String filePath = "upload/" + type;
                 fileUtil.createDossier(filePath);
                 fileUtil.saveFichier(file, filePath);
+
+                Optional<AttachmentType> attachmentType = attachementTypeRepository.findByAbrv(type);
+                fileRepository.save(File.builder().name(fileName).url(filePath).attachmentType(attachmentType.get()).build());
             }
 
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Fichier enregistré"));

@@ -24,6 +24,14 @@ public class File  {
         @Column(name = "url")
         private String url;
 
+        @Builder.Default
+        @Column(name = "isDeleted")
+        private Boolean isDeleted = false;
+
+        @ManyToOne
+        @JoinColumn(name = "Attachment_type_id")
+        private AttachmentType attachmentType;
+
         public File(String name, String url) {
                 this.name=name;
                 this.url=url;

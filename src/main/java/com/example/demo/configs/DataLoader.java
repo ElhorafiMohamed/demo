@@ -3,8 +3,10 @@ package com.example.demo.configs;
 import com.example.demo.dao.AuthenticationDao;
 import com.example.demo.dao.FileDao;
 import com.example.demo.dtos.UserProps;
+import com.example.demo.entities.AttachmentType;
 import com.example.demo.entities.User;
 import com.example.demo.enums.Role;
+import com.example.demo.repositories.AttachementTypeRepository;
 import com.example.demo.services.AuthenticationService;
 import com.example.demo.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -23,6 +27,7 @@ import java.nio.file.Paths;
 @Slf4j
 public class DataLoader {
     public final AuthenticationDao authenticationService;
+    public final AttachementTypeRepository attachementTypeRepository;
     public final FileDao fileDao;
     public final FileUtil fileUtil;
     private final PasswordEncoder passwordEncoder;
@@ -40,6 +45,19 @@ public class DataLoader {
             fileUtil.createDossier("upload/plain");
             fileUtil.createDossier("upload/png");
             fileUtil.createDossier("upload/sheet");
+            fileUtil.createDossier("upload/jpeg");
+
+            List<AttachmentType> attachmentTypes = Arrays.asList(
+                    AttachmentType.builder().abrv("word").name("document").build(),
+                    AttachmentType.builder().abrv("pdf").name("pdf").build(),
+                    AttachmentType.builder().abrv("plain").name("text").build(),
+                    AttachmentType.builder().abrv("png").name("png").build(),
+                    AttachmentType.builder().abrv("csv").name("csv").build(),
+                    AttachmentType.builder().abrv("jpeg").name("jpeg").build(),
+                    AttachmentType.builder().abrv("sheet").name("sheet").build()
+            );
+
+            attachementTypeRepository.saveAll(attachmentTypes);
         };
     }
 
@@ -55,5 +73,12 @@ public class DataLoader {
         authenticationService.register(user);
     }
 
+//    public void loadTypeFichier({attachement}) {
+//        var attachmentType = AttachmentType.builder()
+//                .abrv(userProps.getFirstName())
+//                .name(userProps.getLastName())
+//                .build();
+//        attachementTypeRepository.save(attachmentType);
+//    }
 
 }
