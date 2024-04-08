@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import com.example.demo.dao.DemoDao;
-import com.example.demo.dtos.EmailDetails;
 import com.example.demo.email.EmailSender;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;

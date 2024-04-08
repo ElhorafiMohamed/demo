@@ -104,11 +104,9 @@ public class AuthenticationService implements AuthenticationDao {
         if (validTokens.isEmpty()) {
             return;
         }
-
         validTokens.forEach(t -> {
             t.setLoggedOut(true);
         });
-
         tokenRepository.saveAll(validTokens);
     }
 
@@ -117,7 +115,6 @@ public class AuthenticationService implements AuthenticationDao {
         token.setToken(jwt);
         token.setLoggedOut(false);
         token.setUser(user);
-        System.out.println(jwt);
         tokenRepository.save(token);
     }
 
