@@ -2,9 +2,9 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.dao.FileDao;
+import com.example.demo.entities.File;
 import com.example.demo.exceptions.ResponseMessage;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,14 +28,12 @@ public class FileController {
     }
 
     @GetMapping("/files/{typeFichier:.+}")
-    public ResponseEntity<List<String>> getAllFichierByType(@PathVariable String typeFichier) throws IOException {
-        List<String> fileInfos = storageService.getAllFichierByType(typeFichier);
-        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+    public List<File> getAllFichierByType(@PathVariable String typeFichier) throws IOException {
+        return storageService.getAllFichierByType(typeFichier);
     }
 
     @GetMapping("/getAllFichier")
-    public ResponseEntity<List<String>> getAllFichier() throws IOException {
-        List<String> fileInfos = storageService.getAllFichier();
-        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
+    public List<File> getAllFichier() throws IOException {
+        return storageService.getAllFichier();
     }
 }

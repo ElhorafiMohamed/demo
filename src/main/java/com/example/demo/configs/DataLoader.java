@@ -7,7 +7,6 @@ import com.example.demo.entities.AttachmentType;
 import com.example.demo.entities.User;
 import com.example.demo.enums.Role;
 import com.example.demo.repositories.AttachementTypeRepository;
-import com.example.demo.services.AuthenticationService;
 import com.example.demo.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 

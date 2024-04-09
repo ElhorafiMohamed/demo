@@ -16,8 +16,6 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -63,11 +61,37 @@ public class FileService implements FileDao {
         }
     }
 
+    @Override
+    public List<File> getAllFichier()  {
+            List<File> files = fileRepository.findAll();
+            List<File> filteredFiles = files.stream()
+                    .filter(file -> !file.getIsDeleted())
+                    .collect(Collectors.toList());
+        return filteredFiles;
+    }
+
+
+    @Override
+    public List<File> getAllFichierByType(String string) {
+            List<File> files = fileRepository.findAll();
+            Optional<AttachmentType> attachmentType = attachementTypeRepository.findByAbrv(string);
+            List<File> filteredFiles = files.stream()
+                    .filter(file -> (file.getAttachmentType() == attachmentType.get()) && !file.getIsDeleted())
+                    .collect(Collectors.toList());
+        return filteredFiles;
+    }
+
 
     @Override
     public ResponseEntity<ResponseMessage> deleteAll() {
         try {
-            FileSystemUtils.deleteRecursively(root.toFile());
+            fileRepository.updateAllFiles(true);
+//            List<File> files = fileRepository.findAll().stream()
+//                    .peek(file ->
+//                    { file.setIsDeleted(true);
+//                    })
+//                    .collect(Collectors.toList());
+//            files = fileRepository.saveAll(files);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Fichier supprimer"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -75,28 +99,8 @@ public class FileService implements FileDao {
         }
     }
 
-    //type existe est 7 : csv doc pdf plain(text) png sheet jpeg
-    @Override
-    public List<String> getAllFichierByType(String string) throws IOException {
-            List<String> document = Files.walk(Paths.get("upload/"+string), 1)
-                    .filter(Files::isRegularFile)
-                    .map(Path::getFileName)
-                    .map(Path::toString)
-                    .collect(Collectors.toList());
-            return document;
-    }
 
-    @Override
-    public List<String> getAllFichier() throws IOException {
-        List<String> document = getAllFichierByType("pdf");
-        List<String> document1 = getAllFichierByType("csv");
-        List<String> document2 = getAllFichierByType("plain");
-        List<String> document3 = getAllFichierByType("sheet");
-        System.out.println(document);
-        System.out.println(document1);
-        System.out.println(document2);
-        System.out.println(document3);
-        return document;
-    }
+
+
 }
 
