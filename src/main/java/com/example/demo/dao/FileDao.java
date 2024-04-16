@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 
-import com.example.demo.entities.File;
+import com.example.demo.entities.datasource1.File;
 import com.example.demo.exceptions.ResponseMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;

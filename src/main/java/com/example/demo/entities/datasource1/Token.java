@@ -1,10 +1,8 @@
-package com.example.demo.entities;
+package com.example.demo.entities.datasource1;
 
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.sql.SQLOutput;
 
 @Entity
 @NoArgsConstructor

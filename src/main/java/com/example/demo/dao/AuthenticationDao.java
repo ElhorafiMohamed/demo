@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.dtos.ChangePassDTO;
-import com.example.demo.entities.User;
+import com.example.demo.entities.datasource1.User;
 import com.example.demo.exceptions.AuthenticationResponse;
 import org.springframework.http.ResponseEntity;
 

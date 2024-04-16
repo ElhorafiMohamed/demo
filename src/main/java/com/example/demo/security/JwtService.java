@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.entities.User;
+import com.example.demo.entities.datasource1.User;
 import com.example.demo.repositories.TokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

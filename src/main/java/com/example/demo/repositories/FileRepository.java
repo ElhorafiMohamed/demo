@@ -1,7 +1,7 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entities.AttachmentType;
-import com.example.demo.entities.File;
+import com.example.demo.entities.datasource1.AttachmentType;
+import com.example.demo.entities.datasource1.File;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

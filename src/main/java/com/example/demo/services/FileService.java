@@ -2,8 +2,8 @@ package com.example.demo.services;
 
 
 import com.example.demo.dao.FileDao;
-import com.example.demo.entities.AttachmentType;
-import com.example.demo.entities.File;
+import com.example.demo.entities.datasource1.AttachmentType;
+import com.example.demo.entities.datasource1.File;
 import com.example.demo.exceptions.ResponseMessage;
 import com.example.demo.repositories.AttachementTypeRepository;
 import com.example.demo.repositories.FileRepository;
@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 

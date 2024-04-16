@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.entities.datasource1;
 
 import com.example.demo.enums.Role;
 import jakarta.persistence.*;
