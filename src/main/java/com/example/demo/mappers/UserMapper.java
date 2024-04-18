@@ -2,7 +2,7 @@ package com.example.demo.mappers;
 
 
 import com.example.demo.dtos.ChangePassDTO;
-import com.example.demo.entities.datasource1.User;
+import com.example.demo.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 

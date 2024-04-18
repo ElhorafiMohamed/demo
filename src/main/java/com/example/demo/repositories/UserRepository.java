@@ -1,6 +1,6 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entities.datasource1.User;
+import com.example.demo.entities.User;
 import com.example.demo.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;

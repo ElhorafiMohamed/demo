@@ -24,9 +24,4 @@ public final class DateTimeUtil {
         return LocalDate.parse(date, formatter);
     }
 
-
-
-
-
-
 }

@@ -2,8 +2,8 @@ package com.example.demo.services;
 
 
 import com.example.demo.dao.FileDao;
-import com.example.demo.entities.datasource1.AttachmentType;
-import com.example.demo.entities.datasource1.File;
+import com.example.demo.entities.AttachmentType;
+import com.example.demo.entities.File;
 import com.example.demo.exceptions.ResponseMessage;
 import com.example.demo.repositories.AttachementTypeRepository;
 import com.example.demo.repositories.FileRepository;
@@ -85,12 +85,6 @@ public class FileService implements FileDao {
     public ResponseEntity<ResponseMessage> deleteAll() {
         try {
             fileRepository.updateAllFiles(true);
-//            List<File> files = fileRepository.findAll().stream()
-//                    .peek(file ->
-//                    { file.setIsDeleted(true);
-//                    })
-//                    .collect(Collectors.toList());
-//            files = fileRepository.saveAll(files);
             return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Fichier supprimer"));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

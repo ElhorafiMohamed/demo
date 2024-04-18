@@ -1,8 +1,9 @@
-package com.example.demo.entities.datasource1;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,5 +37,6 @@ public class File  {
                 this.name=name;
                 this.url=url;
         }
+
 
 }

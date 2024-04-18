@@ -2,7 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.dao.FileDao;
-import com.example.demo.entities.datasource1.File;
+import com.example.demo.entities.File;
 import com.example.demo.exceptions.ResponseMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

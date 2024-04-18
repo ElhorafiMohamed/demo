@@ -1,4 +1,4 @@
-package com.example.demo.entities.datasource;
+package com.example.demo.entities;
 
 
 import jakarta.persistence.*;
@@ -11,8 +11,8 @@ import lombok.*;
 @Setter
 @Builder
 @ToString
-@Table(name = "attachement")
-public class Attachment {
+@Table(name = "attachement_type")
+public class AttachmentType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
