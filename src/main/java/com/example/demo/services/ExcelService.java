@@ -43,7 +43,6 @@ public class ExcelService implements ExcelDao {
             Sheet sheet = workbook.getSheet(nameSheet);
             if (sheet != null && nameSheet == "AttachmentType") {
                 for (Row row : sheet) {
-                    System.out.println(row.getRowNum());
                     AttachmentType attachmentType = new AttachmentType();
                     attachmentType.setName(row.getCell(1).toString());
                     attachmentType.setAbrv(row.getCell(2).toString());
@@ -54,17 +53,6 @@ public class ExcelService implements ExcelDao {
 
             Map<Integer, List<String>> data = new HashMap<>();
 
-
-            //Attachment attachment = new Attachment();
-//            for (Cell cell : row) {
-//
-//                {
-//                    //attachment.setName(cell);
-//
-//                    System.out.println(cell);
-//                }
-//            }
-//            i++;
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseMessage("Fichier enregistré"));
